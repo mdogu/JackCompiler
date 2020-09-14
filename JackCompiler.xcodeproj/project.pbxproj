@@ -82,19 +82,19 @@
 				5A931840250F7CE800BE4EB6 /* VMWriter.swift */,
 				5A93183C250F7B5900BE4EB6 /* XMLWriter.swift */,
 				5A93182F250F785000BE4EB6 /* Console.swift */,
-				5A931831250F788500BE4EB6 /* New Group */,
+				5A931831250F788500BE4EB6 /* Extensions */,
 			);
 			path = JackCompiler;
 			sourceTree = "<group>";
 		};
-		5A931831250F788500BE4EB6 /* New Group */ = {
+		5A931831250F788500BE4EB6 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				5A931832250F789E00BE4EB6 /* FileHandleExtension.swift */,
 				5A931834250F78E300BE4EB6 /* FileManagerExtension.swift */,
 				5A931836250F790300BE4EB6 /* StringExtension.swift */,
 			);
-			path = "New Group";
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
