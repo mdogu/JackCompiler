@@ -16,7 +16,6 @@ guard CommandLine.argc == 2 else {
 let inputURL = URL(fileURLWithPath: CommandLine.arguments[1])
 let inputFiles: [URL]
 let workingFolder: URL
-let outputFolder: URL
 
 if inputURL.lastPathComponent.ends(with: ".jack") {
     guard FileManager.default.fileExists(atPath: inputURL.path) else {
@@ -50,35 +49,17 @@ if inputURL.lastPathComponent.ends(with: ".jack") {
     }
 }
 
-// MARK: Symbol Table Test
-
-outputFolder = workingFolder.appendingPathComponent("output")
-if FileManager.default.fileExists(atPath: outputFolder.path) == false {
-    do {
-        try FileManager.default.createDirectory(at: outputFolder, withIntermediateDirectories: true, attributes: nil)
-    } catch {
-        Console.error(error.localizedDescription)
-        exit(0)
-    }
-}
-
 do {
     for inputFile in inputFiles {
         let tokenizer = try JackTokenizer(inputFileURL: inputFile)
-        let outputFileName = inputFile.lastPathComponent.replacingOccurrences(of: ".jack", with: ".xml")
-        let outputFile = outputFolder.appendingPathComponent(outputFileName)
-        let xmlWriter = try XMLWriter(outputFileURL: outputFile)
-        let compiler = CompilationEngine(tokenizer: tokenizer, writer: xmlWriter)
+        let outputFileName = inputFile.lastPathComponent.replacingOccurrences(of: ".jack", with: ".vm")
+        let outputFile = workingFolder.appendingPathComponent(outputFileName)
+        let vmWriter = try VMWriter(outputFileURL: outputFile)
+        let symbolTable = SymbolTable()
+        let compiler = CompilationEngine(tokenizer: tokenizer, writer: vmWriter, symbolTable: symbolTable)
         try compiler.compile()
     }
 } catch {
     Console.error(error.localizedDescription)
     exit(0)
 }
-
-
-// MARK: Code Generation Test
-
-
-
-

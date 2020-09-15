@@ -59,6 +59,11 @@ class XMLWriter {
         outputFile.write(line: padding + output)
     }
     
+    func write(tag: String, value: String) {
+        let output = "<\(tag)> \(value) </\(tag)>"
+        outputFile.write(line: padding + output)
+    }
+    
     func closeFile() {
         outputFile.closeFile()
     }

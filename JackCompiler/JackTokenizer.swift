@@ -101,6 +101,21 @@ enum Token {
     static var identifierType: Token { return Token.identifier("") }
     static var integerConstantType: Token { return Token.integerConstant(0) }
     static var stringConstantType: Token { return Token.stringConstant("") }
+    
+    var text: String {
+        switch self {
+        case let .keyword(keyword):
+            return keyword.rawValue
+        case let .symbol(symbol):
+            return symbol.rawValue
+        case let .identifier(identifier):
+            return identifier
+        case let .integerConstant(integer):
+            return "\(integer)"
+        case let .stringConstant(string):
+            return string
+        }
+    }
 }
 
 extension Token: Equatable {
